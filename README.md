@@ -1,49 +1,27 @@
 # neovim-raspberry
-Steps for installing neovim newer versions on Raspberry Pi (64-bit)
 
-Just run the install script.
+Repo for installing neovim building it from source with Docker.
+
+## Description
+This repository provides a script for installing Neovim on a Raspberry Pi (64-bit). It uses Docker to build and install Neovim, ensuring compatibility with the Raspberry Pi architecture.
+
+## Prerequisites
+- Raspberry Pi with a 64-bit OS.
+- Docker installed on the Raspberry Pi.
+
+## Installation
+
+To install the latest version of Neovim, simply run the following command:
 
 ```sh
 chmod +x ./install.sh && ./install.sh
-
 ```
 
-## Manual installation & explanation
-
-```Dockerfile
-FROM arm64v8/debian:latest
-
-RUN apt-get update && apt-get install -y \
-    git cmake ninja-build libtool libtool-bin autoconf automake pkg-config unzip gettext \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN git clone --branch v0.9.0 --depth 1 https://github.com/neovim/neovim
-
-WORKDIR /neovim
-RUN make CMAKE_BUILD_TYPE=RelWithDebInfo
-RUN make install
-
-RUN apt-get purge -y git cmake ninja-build libtool libtool-bin autoconf automake pkg-config unzip gettext
-RUN apt-get autoremove -y
-
-CMD ["nvim"]
-```
-
-Execute the command
+If you want to install a specific version of Neovim, pass the version number as an argument:
 
 ```sh
-docker build -t neovim-build .
+./install.sh v0.9.0
 ```
 
-After the build
-
-```sh
-docker run -d --name neovim-build neovim-build 
-```
-
-Now, copy the `docker cp neovim-build:/usr/local/bin/nvim .` wherever you want
-You also need the runtime, located at `docker cp neovim-build:/usr/local/share/nvim/runtime/ .`
-
-My recomendation is to move the binary and the runtime to the same place where they were located. Then you just run `nvim`.
-
-For choosing an specific version, change it at the dockerfile statement `RUN git clone --branch v0.9.0 https://github.com/neovim/neovim`
+> [!NOTE]
+>The script defaults to the latest version of Neovim if no version argument is provided. If an invalid version is specified, the script will fail with an error message.
