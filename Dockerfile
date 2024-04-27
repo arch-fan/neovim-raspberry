@@ -14,9 +14,6 @@ RUN if [ "$NEOVIM_VERSION" = "latest" ]; then \
 
 WORKDIR /neovim
 RUN make CMAKE_BUILD_TYPE=RelWithDebInfo
-RUN make install
+RUN cd build && cpack -G DEB
 
-RUN apt-get purge -y git cmake ninja-build libtool libtool-bin autoconf automake pkg-config unzip gettext
-RUN apt-get autoremove -y
-
-CMD ["nvim"]
+CMD ["echo", "nothing to look here"]
