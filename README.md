@@ -2,8 +2,14 @@
 
 Repo for installing neovim building it from source with Docker.
 
+## Remote install
+```bash
+curl -fsSL https://s.arch-fan.com/nvim-install | bash # -s "v0.9.0"
+```
+
 ## Description
 This repository provides a script for installing Neovim on a Raspberry Pi (64-bit). It uses Docker to build and install Neovim, ensuring compatibility with the Raspberry Pi architecture.
+App is installed via `apt`, for removing neovim just run `apt remove -y neovim`.
 
 ## Prerequisites
 - Raspberry Pi with a 64-bit OS.
