@@ -4,7 +4,7 @@ Repo for installing neovim building it from source with Docker.
 
 ## Remote install
 ```bash
-curl -fsSL https://s.arch-fan.com/nvim-install | bash # -s "v0.9.0"
+curl -fsSL https://s.archfan.com/nvim-install | bash # -s "v0.9.0"
 ```
 
 ## Description
