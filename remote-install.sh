@@ -6,6 +6,12 @@ then
     exit 1
 fi
 
+if ! command -v curl &> /dev/null
+then
+    echo "Curl is not installed. Please install Curl to continue."
+    exit 1
+fi
+
 NEOVIM_VERSION=${1:-latest}
 
 DOCKERFILE_CONTENT=$(curl -s "https://raw.githubusercontent.com/arch-fan/neovim-raspberry/main/Dockerfile")
