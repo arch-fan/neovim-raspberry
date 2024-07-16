@@ -1,0 +1,25 @@
+{
+  "name": "neovim-raspberry",
+  "version": "1.0.0",
+  "description": "Steps for building/installing neovim newer versions on Raspberry Pi (64-bit). Can also be used on any ARM device which accepts DEB.",
+  "private": true,
+  "scripts": {
+    "lint:shell": "shellcheck *.sh",
+    "lint:docker": "dockerfilelint Dockerfile",
+    "lint": "npm run lint:shell && npm run lint:docker"
+  },
+  "keywords": [
+    "neovim",
+    "arm",
+    "builder",
+    "installer",
+    "raspberry",
+    "docker"
+  ],
+  "author": "arch-fan",
+  "license": "MIT",
+  "devDependencies": {
+    "dockerfilelint": "1.8.0",
+    "shellcheck": "3.0.0"
+  }
+}
