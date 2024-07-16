@@ -1,8 +1,8 @@
-FROM arm64v8/debian:latest
+FROM arm64v8/debian:stable
 
 ARG NEOVIM_VERSION=latest
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git cmake ninja-build libtool libtool-bin autoconf automake pkg-config unzip gettext \
     && rm -rf /var/lib/apt/lists/*
 

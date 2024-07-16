@@ -8,7 +8,7 @@ fi
 
 NEOVIM_VERSION=${1:-latest}
 
-docker build --build-arg NEOVIM_VERSION=${NEOVIM_VERSION} -t neovim-build .
+docker build --build-arg NEOVIM_VERSION="${NEOVIM_VERSION}" -t neovim-build .
 
 docker run -d --name neovim-build neovim-build
 docker cp neovim-build:/neovim/build/nvim-linux64.deb ./nvim-linux64.deb

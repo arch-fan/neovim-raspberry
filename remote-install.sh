@@ -21,7 +21,7 @@ if [ -z "$DOCKERFILE_CONTENT" ]; then
     exit 1
 fi
 
-echo "$DOCKERFILE_CONTENT" | docker build --build-arg NEOVIM_VERSION=${NEOVIM_VERSION} -t neovim-build -
+echo "$DOCKERFILE_CONTENT" | docker build --build-arg NEOVIM_VERSION="${NEOVIM_VERSION}" -t neovim-build -
 
 docker run -d --name neovim-build neovim-build
 docker cp neovim-build:/neovim/build/nvim-linux64.deb ./nvim-linux64.deb
