@@ -1,0 +1,15 @@
+import { matches } from "lib/regex.ab"
+
+pub fun is_version_correct(version: Text): Bool {
+    return matches(version, "^v\d+\.\d+\.\d+$")?
+}
+
+main {
+    let test_ver = "v9.11.111"
+
+    if is_version_correct(test_ver)? {
+        echo "version correct ({test_ver})"
+    } else {
+        echo "version incorrect ({test_ver})"
+    }
+}

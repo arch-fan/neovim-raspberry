@@ -1,0 +1,20 @@
+import { command_exists } from "lib/command_exists.ab"
+
+pub fun necesary_commands(is_remote: Bool): Null {
+    let commands = ["docker", "sudo", "rm", "apt"]
+
+    if is_remote {
+        commands += ["curl"]
+    }
+    
+    loop command in commands {
+        if command_exists(command) == false {
+            echo "Command {command} wasn't found. Please install it."
+            fail 1
+        }
+    }
+}
+
+main {
+    necesary_commands(true)?
+}

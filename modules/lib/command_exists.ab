@@ -1,0 +1,7 @@
+pub fun command_exists(command: Text): Bool {
+    let res = silent $command -v {command}$ failed {
+        return false
+    }
+
+    return true
+}

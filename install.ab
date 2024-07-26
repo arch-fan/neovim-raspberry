@@ -1,0 +1,44 @@
+import { necesary_commands } from "modules/commands.ab"
+import { is_version_correct } from "modules/version.ab"
+
+main(args) {
+    necesary_commands(false)?
+
+    let neovim_version = args[1] != "" then args[1] else "latest"
+
+    if neovim_version != "latest" and is_version_correct(neovim_version)? == false {
+        echo "Version {neovim_version} invalid."
+    }
+
+    $docker build --build-arg NEOVIM_VERSION="{neovim_version}" -t neovim-build .$ failed {
+        echo "Error at building Docker container."
+        fail 1
+    }
+
+    $docker run -d --name neovim-build neovim-build$ failed {
+        echo "Failed at running Docker container."
+        fail 1
+    }
+
+    $docker cp neovim-build:/neovim/build/nvim-linux64.deb ./nvim-linux64.deb$ failed {
+        echo "Failed at copying deb file from container."
+    }
+
+    $sudo apt install -y ./nvim-linux64.deb$ failed {
+        echo "Error at installing deb file with apt."
+    }
+
+    $rm ./nvim-linux64.deb$ failed {
+        echo "Error at removing deb file from current directory."
+    }
+
+    $docker rm -f neovim-build$ failed {
+        echo "Error ar removing Docker container."
+    }
+
+    $docker rmi neovim-build$ failed {
+        echo "Error at removing Docker image."
+    }
+
+    echo "Installation finished!"
+}

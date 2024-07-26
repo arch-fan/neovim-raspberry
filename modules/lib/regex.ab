@@ -1,0 +1,18 @@
+import { command_exists } from "./command_exists.ab"
+
+pub fun matches(text: Text, regex: Text): Bool {
+    if command_exists("grep") == false {
+        echo "Grep command wasn't found"
+        fail 1
+    }
+
+    silent $echo "{text}" | grep -E "{regex}"$ failed {
+        return false
+    }
+
+    return true
+}
+
+main {
+    echo matches("hello", "hello")?
+}
